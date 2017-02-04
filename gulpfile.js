@@ -19,15 +19,15 @@ var paths = {
     },
     scripts : {
         src: './source/js/**/**/*.js',
-        dest: './public/js',
+        dest: './public/js/',
     },
     php: {
         src: './source/php/**/**/*.php',
-        dest: './public/php'
+        dest: './public/php/'
     },
     assets: {
         src: './source/img/**/**/*.*',
-        dest: './public/img'
+        dest: './public/img/'
     },
     webserver: {
         dest: './public/'
@@ -93,7 +93,7 @@ gulp.task('init', function() {
 });
 
 //let's start watching
-gulp.task('watch', function() {
+gulp.task('lookup', function() {
       gulp.watch(paths.styles.src, ['sass-compile']);
       gulp.watch(paths.pug.src, ['pug-compile']);
       gulp.watch(paths.scripts.src, ['js-copy']);
@@ -102,5 +102,5 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', function() {
-  return gulp.start('watch', 'webserver');
+  return gulp.start('webserver', 'lookup');
 });
