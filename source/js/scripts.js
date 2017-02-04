@@ -34,16 +34,9 @@ function handleLogin() {
         });
 
         // if successfully done
-        // request.done(function(response, status, jqXHR){
-        //     loginResponseHandler(response, status, jqXHR);
-        // });
-
         request.done(loginResponseHandler);
 
         // if any error occured
-        // request.fail(function(jqXHR, status, error){
-        //     loginErrorHandler(jqXHR, status, error)
-        // });
         request.fail(loginErrorHandler);
     });
 }
