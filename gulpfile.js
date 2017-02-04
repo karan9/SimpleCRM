@@ -10,8 +10,6 @@ var zip = require('gulp-zip');
 var uuid = require('node-uuid');
 var webserver = require('gulp-webserver');
 
-global.mUniqueStamp 
-
 // paths
 var paths = {
     pug: {
@@ -92,7 +90,6 @@ gulp.task('webserver', function () {
 
 // zip deh files cause i'm old school
 gulp.task('zipit', function() {
-    var currentDate = new Date();
     var uuidStamp = uuid.v1();
     var $filename = 'archive-' + 'CRM-' + uuidStamp + '-' + os.platform() + '.zip' 
     return gulp.src('./public/**/**/*.*')
