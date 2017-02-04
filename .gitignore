@@ -1,2 +1,8 @@
 # node_modules folder
 node_modules
+
+# OSX Specific File
+.DS_Store
+
+# output folder no need of binaries
+output

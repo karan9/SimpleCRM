@@ -1,11 +1,16 @@
 var gulp = require('gulp');
+var path = require('path');
 var sass = require('gulp-sass');
+var os = require('os');
 var pug = require('gulp-pug');
 var uglify = require('gulp-uglify');
 var minify = require('gulp-minify');
 var imagemin = require('gulp-imagemin');
+var zip = require('gulp-zip');
+var uuid = require('node-uuid');
 var webserver = require('gulp-webserver');
 
+global.mUniqueStamp 
 
 // paths
 var paths = {
@@ -29,8 +34,11 @@ var paths = {
         src: './source/img/**/**/*.*',
         dest: './public/img/'
     },
-    webserver: {
+    public: {
         dest: './public/'
+    },
+    output: {
+        dest: './output/'
     }
 }
 
@@ -74,11 +82,22 @@ gulp.task('img-copy', function() {
 
 // websever instance
 gulp.task('webserver', function () {
-  return gulp.src(paths.webserver.dest)
+  return gulp.src(paths.public.dest)
     .pipe(webserver({
       livereload: true,
       port: 8003
     }));
+});
+
+
+// zip deh files cause i'm old school
+gulp.task('zipit', function() {
+    var currentDate = new Date();
+    var uuidStamp = uuid.v1();
+    var $filename = 'archive-' + 'CRM-' + uuidStamp + '-' + os.platform() + '.zip' 
+    return gulp.src('./public/**/**/*.*')
+        .pipe(zip($filename))
+        .pipe(gulp.dest('./output/'))
 });
 
 // init deh tasks
