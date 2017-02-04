@@ -1,0 +1,29 @@
+{
+  "name": "simplecrm",
+  "version": "1.0.0",
+  "description": " A Simple CRM i Made For learning PHP",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-pug": "^3.2.0",
+    "gulp-minify": "^0.0.15",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.0.1",
+    "gulp-webserver": "^0.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karan9/SimpleCRM.git"
+  },
+  "author": "Karan Srivastava",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karan9/SimpleCRM/issues"
+  },
+  "homepage": "https://github.com/karan9/SimpleCRM#readme"
+}
