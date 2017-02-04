@@ -1,2 +1,23 @@
-body {
-  background: red; }
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkmAkAAJ8AmzsOXcYAAAAASUVORK5CYII=), url("https://unsplash.it/2000/1000?image=1060");
+  background-blend-mode: screen multiply; }
+  .wrapper .container#login-container {
+    background: #fff;
+    height: 45%;
+    width: 25%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 50px #000; }
+    .wrapper .container#login-container .form-signin {
+      padding: 15px; }
+    .wrapper .container#login-container #loginBtn {
+      margin-top: 20px; }
+    .wrapper .container#login-container .form-signin-heading {
+      margin-bottom: 20px; }
+    .wrapper .container#login-container #login-alert {
+      display: none; }
+      .wrapper .container#login-container #login-alert.is-visible {
+        display: block; }
