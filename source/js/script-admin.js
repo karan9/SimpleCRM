@@ -1,5 +1,5 @@
 $(function() {
-    showPageLoader();
+//showPageLoader();
 });
 
 function showPageLoader() {
