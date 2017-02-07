@@ -17,10 +17,15 @@ body
             form(method="post").form-signin#loginForm
                 h2.form-signin-heading Please Signin
                 label(for="inputEmail").sr-only Verification Id
-                input(type="text", placeholder="Enter Your User Id", required="", autofocus="").form-control#inputEmail
+                input(type="text", placeholder="Enter Your User Id", required="", autofocus="", name="username").form-control#inputEmail
                 label(for="inputPassword").sr-only Password
-                input(type="password", placeholder="Password", required="").form-control#inputPassword
+                input(type="password", placeholder="Password", required="", name="password").form-control#inputPassword
+                label(for="checkRole").sr-only Role
+                select(name="role").form-control#role
+                    option(value="admin") Admin
+                    option(value="client") Client                
                 button(type="submit").btn.btn-lg.btn-primary.btn-block#loginBtn Sign In
+
             .col-md-12#login-alert
                 .alert.alert-danger Oh! Snap Something happened
     // jQuery

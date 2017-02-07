@@ -4,9 +4,9 @@
 * A Simple Class That Encapsulates Database for me
 *
 */
-require_once 'meekrodb.2.3.class.php';
+require_once "../vendor/meekrodb.2.3.class.php";
 
-class SystemHandler {
+class UserHandler {
     
     function __construct(DatabaseHandler $db) {
         $this->$db = $db;
