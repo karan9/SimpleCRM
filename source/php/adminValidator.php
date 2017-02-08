@@ -72,10 +72,10 @@ function main() {
     $username = $_POST['username'];
     $role = $_POST['role'];
     $userHandler = new UserHandler();
-    // checkLoginVars
-    $ret = checkLoginVars($username, $role);
+    // checkAccessVars
+    $ret = checkAccessVars($username, $role);
     if ($ret) {
-        $val = checkLogin($userHandler, $username, $role);
+        $val = checkAccess($userHandler, $username, $role);
         if ($val) {
             header("Content-Type: application/json");
             echo getJsonEncodedValue($val, "Admin Validation Successfull");

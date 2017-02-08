@@ -57,11 +57,6 @@ function handleLogin() {
     });
 }
 
-/**
- * TODO: Add a login stuff
- * Handle things with localstorage
- */
-
 
 // our login handler if successfull
 function loginResponseHandler(response, status, jqXHR) {
@@ -82,9 +77,9 @@ function loginResponseHandler(response, status, jqXHR) {
     }
 
     // store thy data
-    localStorage.setItem("role", response.user.role);
-    localStorage.setItem("uid", response.user.uid);
-    localStorage.setItem("username", response.user.username);
+    sessionStorage.setItem("role", response.user.role);
+    sessionStorage.setItem("uid", response.user.uid);
+    sessionStorage.setItem("username", response.user.username);
 
     if (response.user.role == "admin") {
         window.location.href = "../admin-panel/";

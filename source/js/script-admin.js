@@ -1,5 +1,5 @@
 $(function() {
-    //authenticateUser();
+    authenticateUser();
     showPageLoader();
 });
 
@@ -17,8 +17,6 @@ function showErrorAlert($msg) {
     $alertdisplay.text($msg);        
     $alertDiv.slideDown().addClass("is-visible");
 }
-
-
 
 function showPageLoader() {
 
@@ -42,9 +40,9 @@ function authenticateUser() {
 
     // check if login is sucessfull
     var $data = {};
-    $data.role = localStorage.getItem("role");
-    $data.username = localStorage.getItem("username");
-    $data.uid = localStorage.getItem("uid");
+    $data.role = sessionStorage.getItem("role");
+    $data.username = sessionStorage.getItem("username");
+    $data.uid = sessionStorage.getItem("uid");
 
     if ($data.role == "admin", $data.uid.indexOf("AD") >= 0) {
         request = $.ajax({
@@ -66,11 +64,11 @@ function checkAdminDetails(response) {
 
     var $flag = 0;
 
-    if (localStorage.getItem("username") != response.user.username) {
+    if (sessionStorage.getItem("username") != response.user.username) {
         $flag++;
-    } else if (localStorage.getItem("role") == response.user.role) {
+    } else if (sessionStorage.getItem("role") != response.user.role) {
         $flag++;
-    } else if (localStorage.getItem("uid") == response.user.uid) {
+    } else if (sessionStorage.getItem("uid") != response.user.uid) {
         $flag++;
     }
     
@@ -83,10 +81,9 @@ function checkAdminDetails(response) {
     }
 }
 
-function accessValidError(response, status, jqXHR) {
+function accessValidSuccess(response, status, jqXHR) {
     if (typeof response != 'object') {
-        // Show error
-        showErrorAlert("Seems Like an error, Please Contact Your Developer");
+        console.log(response);
         return;
     } 
 
@@ -102,6 +99,6 @@ function accessValidError(response, status, jqXHR) {
     }
 }
 
-function accessValidSuccess(jqXHR, status, error) {
+function accessValidError(jqXHR, status, error) {
     showErrorAlert("Please Check Your Internet Connection");
 }
