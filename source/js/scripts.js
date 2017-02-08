@@ -3,6 +3,23 @@ $(function() {
 });
 
 
+function toggleInputViews($val) {
+    var $form = $('#loginForm');
+    var $inputs = $form.find('input, select, button, textarea');
+
+    // enable inputs for editing
+    $inputs.prop('disabled', $val);
+}
+
+function showErrorAlert($msg) {
+    var $alertDiv = $('#login-alert');
+    var $alertdisplay = $("#login-alert > .alert.alert-danger");
+
+    // change the text and show it
+    $alertdisplay.text($msg);        
+    $alertDiv.slideDown().addClass("is-visible");
+}
+
 // TODO: Enable to handle login via this route
 function handleLogin() {
     var alertdiv = $('#login-alert');
@@ -18,8 +35,7 @@ function handleLogin() {
         var serializedData = loginForm.serialize();
 
         // disable form inputs
-        var inputs  = loginForm.find('input, select, button, textarea');
-        inputs.prop('disabled', true);
+        toggleInputViews(true);
 
         // check for any pending requests and destory if available
         if (request) {
@@ -46,18 +62,39 @@ function handleLogin() {
  * Handle things with localstorage
  */
 
+
 // our login handler if successfull
 function loginResponseHandler(response, status, jqXHR) {
-    // for now let's just console.log
-    console.log("Response Isn \n ", response);
-    console.log("Status is \n", status);
-    console.log("jqXHR is \n", jqXHR);
+    
+    if (typeof response != 'object') {
+        showErrorAlert("Please Contact Your Developer, Seems like Error on server");
+        return false;
+    }
+
+    // check if there is any error
+    if (response.error) {
+        // change the text and show it
+        showErrorAlert(response.message);
+
+        // enable input fields
+        toggleInputViews(false);
+        return false;
+    }
+
+    // store thy data
+    localStorage.setItem("role", response.user.role);
+    localStorage.setItem("uid", response.user.uid);
+    localStorage.setItem("username", response.user.username);
+
+    if (response.user.role == "admin") {
+        window.location.href = "../admin-panel/";
+    } else if (response.user.role == "client") {
+        window.location.href = "../client-panel/";
+    }
 }
 
 
 // our response handler if unsuccessfull
 function loginErrorHandler(jqXHR, status, error) {
-    console.log("error Isn \n ", error);
-    console.log("Status is \n", status);
-    console.log("jqXHR is \n", jqXHR);
+    showErrorAlert("Please Contact Your Developer, Internal Server Error");
 }
