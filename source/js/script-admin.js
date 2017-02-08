@@ -1,3 +1,7 @@
+//
+// NOTE TO SELF: REFACTOR THY MESS!
+//
+
 // empty var to hold our requests
 var request;
 // modal on page load
@@ -83,7 +87,7 @@ function checkAdminDetails(response) {
 
 function accessValidSuccess(response, status, jqXHR) {
     if (typeof response != 'object') {
-        console.log(response);
+        showErrorAlert("Seems Like an error on server end, Please Contact Developer");
         return;
     } 
 
@@ -104,6 +108,45 @@ function accessValidError(jqXHR, status, error) {
     showErrorAlert("Please Check Your Internet Connection");
 }
 
+
+
+// ------------ page setup -------------- //
+function setupTable(response, status, jqXHR) {
+    var $infoModal = $("#info-body-row");
+    var $tblBody = $("#transaction-body");
+    
+    if (typeof response != 'object') {
+        $infoModal.html("<div class='col-md-12'><div class='alert alert-danger'>"+ response.message +"</div>");
+    }
+
+    if (response.error) {
+        $infoModal.html("<div class='col-md-12'><div class='alert alert-danger'>"+ response.message +"</div>");
+    }
+
+    var $table = "";
+
+    for (var i=0; i<response.transactions.length; i++) {
+        x += "<tr>" + 
+            "<td>"+ response.transactions[i].created_at +"</td>"+ 
+            "<td data-uid="+response.transactions[i].uid+">"+ response.transactions[i].uid +"</td>"+
+            "<td>"+ response.transactions[i].card_cust_name +"</td>"+
+            "<td>"+ response.transactions[i].amount +"</td>"+
+            "<td>"+ response.transactions[i].user +"</td>"+
+            "<td>"+ response.transactions[i].source +"</td>"+
+        "</tr>";
+    }
+
+    $tblBody.html($table);
+    console.log(response.transactions);
+}
+
+
+function setupTableError(jqXHR, status, error) {
+    var $infoModal = $("#info-body-row");
+    $infoModal.html("<div class='col-md-12'><div class='alert alert-danger'>"+ response.message +"</div>");
+}
+
+
 function setupCrmPage(response, callback) {
     var navUsername = $("a#username");
     var navUid = $("a#uid");
@@ -113,6 +156,19 @@ function setupCrmPage(response, callback) {
     navUsername.text(response.user.username);
     navUid.text(response.user.uid);
     navRole.text(response.user.role);
+
+    // check if any previous request
+
+    request = $.ajax({
+        url: "../php/getTransactions.php",
+        type: "get"
+    });
+
+    // if successfully done
+    request.done(setupTable);
+
+    // if any error occured
+    request.fail(setupTableError);
 
     // once page setup is done show CRM PAGE
     callback();
