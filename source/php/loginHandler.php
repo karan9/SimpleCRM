@@ -54,6 +54,21 @@ function checkLogin(UserHandler $userHandler, $username, $passwd, $role) {
     }
 }
 
+function getJsonEncodedValue($val, $msg) {
+    // variable to hold our response
+    $response = array("error" => false);
+    
+    if ($val != null) { 
+        $response["error"] = false;
+        $response["message"] = "success: " . $msg;
+        $response["user"] = $val;
+        return json_encode($response);
+    } else {
+        $response["error"] = true;
+        $response["message"] = "error: " . $msg;
+        return json_encode($response);
+    }
+}
 
 function main() {
     $username = $_POST['username'];
@@ -65,12 +80,12 @@ function main() {
     if ($ret) {
         $val = checkLogin($userHandler, $username, $password, $role);
         if ($val) {
-            echo json_encode($val);
+            echo getJsonEncodedValue($val, "Successfull Login");
         } else {
-            echo json_encode($json_error);
+            echo getJsonEncodedValue(null, "unable to login");
         }
     } else {
-        echo json_encode($json_error);  
+        echo getJsonEncodedValue(null, "Please Check Your Login Details");  
     }
 }
 
