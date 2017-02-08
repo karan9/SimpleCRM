@@ -80,11 +80,14 @@ function main() {
     if ($ret) {
         $val = checkLogin($userHandler, $username, $password, $role);
         if ($val) {
+            header("Content-Type: application/json");
             echo getJsonEncodedValue($val, "Successfull Login");
         } else {
+            header("Content-Type: application/json");
             echo getJsonEncodedValue(null, "Incorrect Login details");
         }
     } else {
+        header("Content-Type: application/json");
         echo getJsonEncodedValue(null, "Please Check Your Login Details");  
     }
 }
