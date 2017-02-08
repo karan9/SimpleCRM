@@ -82,7 +82,7 @@ function main() {
         if ($val) {
             echo getJsonEncodedValue($val, "Successfull Login");
         } else {
-            echo getJsonEncodedValue(null, "unable to login");
+            echo getJsonEncodedValue(null, "Incorrect Login details");
         }
     } else {
         echo getJsonEncodedValue(null, "Please Check Your Login Details");  
