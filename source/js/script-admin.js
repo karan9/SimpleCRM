@@ -1,13 +1,14 @@
-$(function() {
-    authenticateUser();
-    showPageLoader();
-});
-
 // empty var to hold our requests
 var request;
 // modal on page load
 var $pageLoaderModal = $("#pageLoaderModal");
 
+$(function() {
+    //start pageloader on ASAP
+    showPageLoader();
+    checkForUsage();
+    authenticateUser(); 
+});
 
 function showErrorAlert($msg) {
     var $alertDiv = $('#alert-error-div');
@@ -19,7 +20,6 @@ function showErrorAlert($msg) {
 }
 
 function showPageLoader() {
-
     // init Loading Modal
     $pageLoaderModal.modal({
         backdrop: 'static',  
@@ -94,11 +94,45 @@ function accessValidSuccess(response, status, jqXHR) {
     }
 
     if (checkAdminDetails(response)) {
-        // show everything
-        $pageLoaderModal.modal("hide");
+        setupCrmPage(response, function() {
+            $pageLoaderModal.modal('hide');
+        });
     }
 }
 
 function accessValidError(jqXHR, status, error) {
     showErrorAlert("Please Check Your Internet Connection");
+}
+
+function setupCrmPage(response, callback) {
+    var navUsername = $("a#username");
+    var navUid = $("a#uid");
+    var navRole = $("a#role");
+
+    // let's update the navbar
+    navUsername.text(response.user.username);
+    navUid.text(response.user.uid);
+    navRole.text(response.user.role);
+
+    // once page setup is done show CRM PAGE
+    callback();
+}
+
+
+
+//---------- check for usage ------------- //
+
+function checkForUsage() {
+    var $infoModal = $("#infoModal");
+    var $formModal = $("#formModal");
+    var $searchBtn = $("#search-btn");
+    var $updateBtn = $("#update-btn");
+
+    $searchBtn.click(function() {
+        $infoModal.modal('show');
+    });
+
+    $updateBtn.click(function() {
+        $infoModal.modal('show');
+    });
 }

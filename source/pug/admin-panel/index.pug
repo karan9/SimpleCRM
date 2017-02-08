@@ -28,6 +28,28 @@ body.pad-top-50
                     .progress
                         .progress-bar.progress-bar-striped.active(role="progressbar", aria-valuenow="45", aria-valuemin="0", aria-valuemax="100")
                             span.sr-only Progress Bar
+ 
+    // ----------------------    information Modal For all Kind of things ------------------------- //
+    .modal.fade#infoModal(tabindex="-1", role="dialog", aria-labelledby="infoModal")
+        .modal-dialog.modal-lg(role="document")
+            .modal-content
+                .modal-body
+                    .row#info-body-row
+                        
+                .modal-footer
+                    button(type="button", data-dismiss="modal").btn.btn-default Close
+
+    // ---------------------  form modal ------------------------------- //
+    form(action="#")#formModal-form
+        .modal.fade#formModal(tabindex="-1", role="dialog", aria-labelledby="formModal")
+            .modal-dialog.modal-lg(role="document")
+                .modal-content
+                    .modal-body
+                        .row#form-body-row
+                            
+                    .modal-footer
+                        button(type="button", data-dismiss="modal").btn.btn-default Close
+                        button(type="submit").btn.btn-primary Submit
     
     // ------------------------    Main Page Meat -------------------------------------------- //
     
@@ -39,18 +61,18 @@ body.pad-top-50
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
-            a.navbar-brand(href="#") Mohit's Resource Mangement
+            a.navbar-brand(href="#") TheeZorba Managment Panel
 
             #navbar.navbar-collapse.collapse
                 ul.nav.navbar-nav.navbar-right
                     li
-                        a(href="#") Dashboard 
+                        a#username(href="#") Dashboard
                             
                     li
-                        a(href="#") User
+                        a#uid(href="#") User
                             
                     li
-                        a(href="#") Settings
+                        a#role(href="#") Settings
                             
 
 
@@ -61,21 +83,19 @@ body.pad-top-50
             .col-sm-3.col-md-2.sidebar
                 ul.nav.nav-sidebar
                     li.active
-                        a(href="#") Overview
+                        a(href="#") Zorba Office
                     li
-                        a(href="#") Reports
+                        a(href="#") WishYourDeals
                     li
-                        a(href="") Analytics
-                    li
-                        a(href="") Export
+                        a(href="#") BestBrandsShop
                 
                 ul.nav.nav-sidebar
                     li
                         a(href="#")
-                            button.btn.btn-primary.btn-block Search
+                            button.btn.btn-primary.btn-block#search-btn Search Transaction
                     li
                         a(href="#")
-                            button.btn.btn-primary.btn-block Update 
+                            button.btn.btn-primary.btn-block#update-btn Update Transaction 
 
 
             // center panel starts
@@ -89,121 +109,64 @@ body.pad-top-50
                         span.text-muted Creates New User/Admin
                     .col-xs-6.col-sm-3.placeholder
                         img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Label
-                        span.text-muted Something Else
+                        h4 Total Students
+                        span.text-muted Shows Total Students
                     .col-xs-6.col-sm-3.placeholder
                         img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Label
-                        span.text-muted Something Else
+                        h4 Percentage Graph
+                        span.text-muted Shows Student based on Percentage
                     .col-xs-6.col-sm-3.placeholder
                         img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Label
-                        span.text-muted Something Else
+                        h4 Location
+                        span.text-muted Shows Stduents From Location They are
 
-
-
-                h2.sub-header Section Title
+                h2.sub-header Transaction's Table
                 .table-responsive
                     table.table.table-striped
                         thead
                             tr
-                                th #
-                                th Header
-                                th Header
-                                th Header
-                                th Header
+                                th Date
+                                th Transaction ID
+                                th Customer Name
+                                th Amount (USD $)
+                                th Merchant ID
                         tbody
-                            tr
+                            tr.success
                                 td 1001
-                                td Lorem
-                                td Ipsum
-                                td Dor
-                                td Set
-                            tr
+                                td Aakash
+                                td MBBS
+                                td Delhi
+                                td Done
+                            tr.warning
                                 td 1002
-                                td block
-                                td dialog
-                                td nav
-                                td bar
-                            tr
+                                td Namit
+                                td BDS
+                                td Lucknow
+                                td Interested
+                            tr.danger
                                 td 1003
-                                td dj
-                                td javascript
-                                td php
-                                td nergal
-                            tr
+                                td Ankita
+                                td B.TECH
+                                td Himachal Pradesh
+                                td Very Intersted
+                            tr.active
                                 td 1004
-                                td something
-                                td else
-                                td is
-                                td fucked
-                            tr
+                                td Prateek
+                                td BCA
+                                td Delhi
+                                td Not Interested
+                            tr.info
                                 td 1005
-                                td everything 
-                                td they
-                                td built
-                                td will
-                            tr
+                                td Jatin
+                                td B.TECH
+                                td Ghaziabad
+                                td Interested
+                            tr.success
                                 td 1006
-                                td Fall
-                                td and
-                                td from
-                                td the
-                            tr
-                                td 1007
-                                td Ashes 
-                                td of their 
-                                td world
-                                td we 
-                            tr
-                                td 1008
-                                td will
-                                td build
-                                td a
-                                td better 
-                            tr
-                                td 1009
-                                td one
-                                td by
-                                td goku
-                                td son
-                            tr
-                                td 1010
-                                td of
-                                td bardock
-                                td fathr
-                                td of
-                            tr
-                                td 1011
-                                td goten
-                                td btw
-                                td todY'S'
-                                td lorem
-                            tr
-                                td 1012
-                                td abin
-                                td seth
-                                td ne 
-                                td diablos
-                            tr
-                                td 1013
-                                td malifiek
-                                td raga
-                                td malifek
-                                td raga
-                            tr
-                                td 1014
-                                td malifek
-                                td what we
-                                td say
-                                td to
-                            tr
-                                td 1015
-                                td god of
-                                td death
-                                td not
-                                td today
-
+                                td Karan
+                                td BCA
+                                td Ghaziabad
+                                td Done
 
     // jQuery
     script(src="https://code.jquery.com/jquery-3.1.1.min.js", integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=", crossorigin="anonymous")

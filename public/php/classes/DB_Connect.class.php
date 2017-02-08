@@ -5,7 +5,7 @@ class DB_Connect {
     // Connecting to database
     public function connect() {       
         // Connecting to mysql database
-        $this->conn = new mysqli('localhost','dsdsad','fnjkndjska','dnakldsamlkm');
+        $this->conn = new mysqli('localhost','sdhaskj','dnnsandsa','dklnd');
 
         // return database handler
         return $this->conn;
