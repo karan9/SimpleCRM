@@ -37,7 +37,10 @@ class TransactionHandler {
         $stmt->bind_param("s", $uid);
         $stmt->execute();
         $stmt->store_result(); // store it some where
-        $transaction = $this->fetchAssocStatement($stmt);
+        $transaction = array();
+        while($r = $this->fetchAssocStatement($stmt)){
+            $transaction[] = $r;
+        }
         $stmt->close();
  
         if ($transaction) {
@@ -52,7 +55,10 @@ class TransactionHandler {
         $stmt->bind_param("s", $cardNum);
         $stmt->execute();
         $stmt->store_result(); // store it some where
-        $transaction = $this->fetchAssocStatement($stmt);
+        $transaction = array();
+        while($r = $this->fetchAssocStatement($stmt)){
+            $transaction[] = $r;
+        }
         $stmt->close();
  
         if ($transaction) {
@@ -71,7 +77,10 @@ class TransactionHandler {
         $stmt->bind_param("s", $date);
         $stmt->execute();
         $stmt->store_result(); // store it some where
-        $transaction = $this->fetchAssocStatement($stmt);
+        $transaction = array();
+        while($r = $this->fetchAssocStatement($stmt)){
+            $transaction[] = $r;
+        }
         $stmt->close();
  
         if ($transaction) {
@@ -86,7 +95,7 @@ class TransactionHandler {
         $stmt->execute();
         $stmt->store_result(); // store it some where
         $transaction = array();
-        while($r = $this->fetchAssocStatement($stmt)){
+        while($r = $this->fetchAssocStatement($stmt)) {
             $transaction[] = $r;
         }
         $stmt->close();

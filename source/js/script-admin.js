@@ -225,20 +225,24 @@ function checkForUsage() {
         }
 
         request = $.ajax({
-            url: "../php/getTransactions.php",
+            url: "../php/searchTransaction.php",
             type: "get"
         });
 
         // if successfully done
-        request.done(setupDataTable);
+        request.done(setupSearchTable);
 
         // if any error occured
-        request.fail(setupDataTableError);
+        request.fail(setupSearchTableError);
     });
 }
 
-function setupDataTable() {
+function setupSearchTable(response, status, jqXHR) {
 
+}
+
+function setupSearchTableError(jqXHR, status, error) {
+    
 }
 
 // search button handler

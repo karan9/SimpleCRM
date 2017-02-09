@@ -51,24 +51,24 @@ body.pad-top-50
                             .form-group
                                 label(for="searchCrietria").col-sm-3.control-label Select Category
                                 .col-sm-6
-                                    select.form-control#formModalSelect
+                                    select.form-control(name="searchSelect")#formModalSelect
                                         option(value="UID") Transaction Id
                                         option(value="CARD") Card Number
                                         option(value="DAY") Date
                             .form-group#transaction-term
                                 label(for="searchCrietria").col-sm-3.control-label Enter Search Term
                                 .col-sm-6
-                                    input.form-control(type="text", placeholder="Enter Transaction Id")
+                                    input.form-control(type="text", name="searchUID", placeholder="Enter Transaction Id")
 
                             .form-group#card-number
                                 label(for="searchCrietria").col-sm-3.control-label Enter Search Term
                                 .col-sm-6
-                                    input.form-control(type="text", placeholder="Enter Card Number" 7)
+                                    input.form-control(type="text", name="searchCARD", placeholder="Enter Card Number" 7)
                             
                             .form-group#date
                                 label(for="searchCrietria").col-sm-3.control-label Enter Search Term
                                 .col-sm-6
-                                    input.form-control(type="text", placeholder="Enter Search Term")
+                                    input.form-control(type="text", name="searchDATE", placeholder="Enter Search Date")
                             .form-group#formModalAlert
                                 .col-sm-10.col-md-offset-1
                                     .alert.alert-danger#formModalAlertdiv Oh! Snap Something went wrong
