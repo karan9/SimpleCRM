@@ -55,7 +55,9 @@ function main() {
     $th = new TransactionHandler();
 
     if ($searchCriteria != true) {
-        echo getJsonvalue(null);
+        header("Content-Type: application/json");
+        echo getJsonEncodedValue(null, "Incorrect, input Found");
+        return;
     }
 
     if ($date != true && $uid != true) {
@@ -67,6 +69,8 @@ function main() {
             header("Content-Type: application/json");
             echo getJsonEncodedValue(null, "No, Transactions Found");
         }
+
+        return;
     }
 
     if ($uid != true && $card != true) {
@@ -78,6 +82,7 @@ function main() {
             header("Content-Type: application/json");
             echo getJsonEncodedValue(null, "No, Transactions Found");
         }
+        return;
     }
 
     if ($date != true && $card != true ) {
@@ -89,6 +94,7 @@ function main() {
             header("Content-Type: application/json");
             echo getJsonEncodedValue(null, "No, Transactions Found");
         }
+        return;
     }
 }
 
