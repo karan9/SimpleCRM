@@ -33,6 +33,8 @@ body.pad-top-50
     .modal.fade#infoModal(tabindex="-1", role="dialog", aria-labelledby="infoModal")
         .modal-dialog.modal-lg(role="document")
             .modal-content
+                .modal-header
+                    h4.modal-title#infoModalTitle
                 .modal-body
                     .row#info-body-row
                         
@@ -46,7 +48,7 @@ body.pad-top-50
                 .modal-content
                     .modal-header
                         h4.modal-title#MyModalLabel Search Transactions
-                    .modal-body
+                    .modal-body(style="max-height: calc(100vh - 300px); overflow-y: auto")
                         .row#form-body-row
                             .form-group
                                 label(for="searchCrietria").col-sm-3.control-label Select Category
@@ -68,13 +70,11 @@ body.pad-top-50
                             .form-group#date
                                 label(for="searchCrietria").col-sm-3.control-label Enter Search Term
                                 .col-sm-6
-                                    input.form-control(type="text", name="searchDATE", placeholder="Enter Search Date")
+                                    input.form-control(type="text", name="searchDATE", placeholder="Enter Search Date")#dateInput
                             .form-group#formModalAlert
                                 .col-sm-10.col-md-offset-1
                                     .alert.alert-danger#formModalAlertdiv Oh! Snap Something went wrong
 
-                                    
-                            
                     .modal-footer
                         button(type="button", data-dismiss="modal").btn.btn-default Close
                         button(type="submit").btn.btn-primary Submit
@@ -108,7 +108,7 @@ body.pad-top-50
         .row
             // sidebar starts
             .col-sm-3.col-md-2.sidebar
-                ul.nav.nav-sidebar
+                ul.nav.nav-sidebar#top-sidebar
                     li.active
                         a(href="#") Zorba Office
                     li
@@ -116,37 +116,19 @@ body.pad-top-50
                     li
                         a(href="#") BestBrandsShop
                 
-                ul.nav.nav-sidebar
+                ul.nav.nav-sidebar#bottom-sidebar
                     li
                         a(href="#")
                             button.btn.btn-primary.btn-block#search-btn Search Transaction
                     li
                         a(href="#")
-                            button.btn.btn-primary.btn-block#update-btn Update Transaction 
-
+                            button.btn.btn-primary.btn-block#create-user-office-btn Create New Office User
+                    li
+                        a(href="#")
+                            button.btn.btn-primary.btn-block#create-user-api-btn Create New Api User
 
             // center panel starts
             .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                h1.page-header Dashboard
-
-                .row.placeholders
-                    .col-xs-6.col-sm-3.placeholder
-                        img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Create User
-                        span.text-muted Creates New User/Admin
-                    .col-xs-6.col-sm-3.placeholder
-                        img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Total Students
-                        span.text-muted Shows Total Students
-                    .col-xs-6.col-sm-3.placeholder
-                        img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Percentage Graph
-                        span.text-muted Shows Student based on Percentage
-                    .col-xs-6.col-sm-3.placeholder
-                        img(src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", width="200", height="200").img-responsive
-                        h4 Location
-                        span.text-muted Shows Stduents From Location They are
-
                 h2.sub-header Transaction's Table
                 .table-responsive
                     table.table.table-striped
@@ -155,7 +137,7 @@ body.pad-top-50
                                 th Date
                                 th Transaction ID
                                 th Customer Name
-                                th Amount (USD $)
+                                th Amount ($ USD)
                                 th Merchant ID
                                 th Source
                         tbody#transaction-body

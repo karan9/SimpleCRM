@@ -47,19 +47,12 @@ function searchTransactionByUid($uid, TransactionHandler $th) {
 } 
 
 function main() {
-    $searchCriteria = $_POST["searchSelect"];
     $card = $_POST["searchCARD"];
     $uid = $_POST["searchUID"];
     $date = $_POST["searchDATE"];
 
     $th = new TransactionHandler();
-
-    if ($searchCriteria != true) {
-        header("Content-Type: application/json");
-        echo getJsonEncodedValue(null, "Incorrect, input Found");
-        return;
-    }
-
+    
     if ($date != true && $uid != true) {
         $val = searchTransactionByCard($card, $th);
         if ($val) {
