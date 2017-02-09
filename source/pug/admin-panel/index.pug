@@ -40,12 +40,40 @@ body.pad-top-50
                     button(type="button", data-dismiss="modal").btn.btn-default Close
 
     // ---------------------  form modal ------------------------------- //
-    form(action="#")#formModal-form
+    form(action="#")#formModal-form.form-horizontal
         .modal.fade#formModal(tabindex="-1", role="dialog", aria-labelledby="formModal")
             .modal-dialog.modal-lg(role="document")
                 .modal-content
+                    .modal-header
+                        h4.modal-title#MyModalLabel Search Transactions
                     .modal-body
                         .row#form-body-row
+                            .form-group
+                                label(for="searchCrietria").col-sm-3.control-label Select Category
+                                .col-sm-6
+                                    select.form-control#formModalSelect
+                                        option(value="UID") Transaction Id
+                                        option(value="CARD") Card Number
+                                        option(value="DAY") Date
+                            .form-group#transaction-term
+                                label(for="searchCrietria").col-sm-3.control-label Enter Search Term
+                                .col-sm-6
+                                    input.form-control(type="text", placeholder="Enter Transaction Id")
+
+                            .form-group#card-number
+                                label(for="searchCrietria").col-sm-3.control-label Enter Search Term
+                                .col-sm-6
+                                    input.form-control(type="text", placeholder="Enter Card Number" 7)
+                            
+                            .form-group#date
+                                label(for="searchCrietria").col-sm-3.control-label Enter Search Term
+                                .col-sm-6
+                                    input.form-control(type="text", placeholder="Enter Search Term")
+                            .form-group#formModalAlert
+                                .col-sm-10.col-md-offset-1
+                                    .alert.alert-danger#formModalAlertdiv Oh! Snap Something went wrong
+
+                                    
                             
                     .modal-footer
                         button(type="button", data-dismiss="modal").btn.btn-default Close
@@ -73,7 +101,6 @@ body.pad-top-50
                             
                     li
                         a#role(href="#") Settings
-                            
 
 
     // main-screen

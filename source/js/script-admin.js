@@ -9,7 +9,7 @@ var $pageLoaderModal = $("#pageLoaderModal");
 
 $(function() {
     //start pageloader on ASAP
-    showPageLoader();
+    //showPageLoader();
     checkForUsage();
     authenticateUser(); 
 });
@@ -108,9 +108,8 @@ function accessValidError(jqXHR, status, error) {
     showErrorAlert("Please Check Your Internet Connection");
 }
 
-
-
 // ------------ page setup -------------- //
+
 function setupTable(response, status, jqXHR) {
     var $infoModal = $("#info-body-row");
     var $tblBody = $("#transaction-body");
@@ -183,12 +182,63 @@ function checkForUsage() {
     var $formModal = $("#formModal");
     var $searchBtn = $("#search-btn");
     var $updateBtn = $("#update-btn");
+    var $formModalForm = $("#formModal-form");
 
     $searchBtn.click(function() {
-        $infoModal.modal('show');
+        $formModal.modal('show');
     });
 
     $updateBtn.click(function() {
         $infoModal.modal('show');
     });
+
+    $("#formModalSelect").change(function() {
+        if (this.value == "UID") {
+            $("#transaction-term").slideDown().addClass("is-visible");
+            $("#card-number").hide();
+            $("#date").hide();
+        } else if (this.value == "CARD") {
+            $("#card-number").slideDown().addClass("is-visible");
+            $("#transaction-term").hide();
+            $("#date").hide();
+        } else if (this.value == "DAY") {
+            $("#date").slideDown().addClass("is-visible");
+            $("#card-number").hide();
+            $("#transaction-term").hide();
+        } else {
+            $("#transaction-term").slideDown().addClass("is-visible");
+        }
+    });
+
+    $formModalForm.submit(function(event) {
+        // let my js handle event handling
+        event.preventDefault();
+
+        $data = $formModalForm.serialize();
+
+        var $inputs = $formModalForm.find("input, select, button, textarea");
+        $inputs.prop("disabled", true);
+
+        // check if we have nay previous requests
+        if (request) {
+            request.abort();
+        }
+
+        request = $.ajax({
+            url: "../php/getTransactions.php",
+            type: "get"
+        });
+
+        // if successfully done
+        request.done(setupDataTable);
+
+        // if any error occured
+        request.fail(setupDataTableError);
+    });
 }
+
+function setupDataTable() {
+
+}
+
+// search button handler

@@ -114,3 +114,8 @@ body.pad-top-50 {
 .placeholder img {
   display: inline-block;
   border-radius: 50%; }
+
+#transaction-form, #card-number, #date, #formModalAlert {
+  display: none; }
+  #transaction-form.is-visible, #card-number.is-visible, #date.is-visible, #formModalAlert.is-visible {
+    display: block; }
