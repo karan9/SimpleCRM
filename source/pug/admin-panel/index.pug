@@ -41,6 +41,42 @@ body.pad-top-50
                 .modal-footer
                     button(type="button", data-dismiss="modal").btn.btn-default Close
 
+
+    // ---------------------  office modal ------------------------------- //
+    form(action="#")#officeUserModal-form.form-horizontal
+        .modal.fade#officeUserModal(tabindex="-1", role="dialog", aria-labelledby="formModal")
+            .modal-dialog.modal-lg(role="document")
+                .modal-content
+                    .modal-header
+                        h4.modal-title#MyModalLabel Create New User
+                    .modal-body(style="max-height: calc(100vh - 300px); overflow-y: auto")
+                        .row#offieModalBody
+                            .form-group#officeModalUsername
+                                label(for="searchCrietria").col-sm-3.control-label Enter Desired Username
+                                .col-sm-6
+                                    input.form-control(type="text", name="username", placeholder="Enter Transaction Id")
+
+                            .form-group#officeModalPassword
+                                label(for="searchCrietria").col-sm-3.control-label Enter Desired Password
+                                .col-sm-6
+                                    input.form-control(type="text", name="password", placeholder="Enter Card Number" 7)
+                            
+                            .form-group#officeModalRole
+                                label(for="searchCrietria").col-sm-3.control-label Enter Role
+                                .col-sm-6
+                                    select.form-control(name="searchSelect")#officeModalSelect
+                                        option(value="client") Client
+                                        option(value="admin") Admin
+
+                            .form-group#OfficeModalAlert
+                                .col-sm-10.col-md-offset-1
+                                    .alert.alert-danger#officeModalAlertdiv Oh! Snap Something went wrong
+
+                    .modal-footer
+                        button(type="button", data-dismiss="modal").btn.btn-default Close
+                        button(type="submit").btn.btn-primary Submit
+
+
     // ---------------------  form modal ------------------------------- //
     form(action="#")#formModal-form.form-horizontal
         .modal.fade#formModal(tabindex="-1", role="dialog", aria-labelledby="formModal")

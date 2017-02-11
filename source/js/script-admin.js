@@ -183,11 +183,18 @@ function setupCrmPage(response, callback) {
 function checkForUsage() {
     var $infoModal = $("#infoModal");
     var $formModal = $("#formModal");
+    var $officeModal = $("#officeUserModal");
     var $searchBtn = $("#search-btn");
+    var $createOfficeUserBtn = $("#create-user-office-btn");
     var $formModalForm = $("#formModal-form");
+    var $officeModalForm = $("#officeUserModal-form");
 
     $searchBtn.click(function() {
         $formModal.modal('show');
+    });
+
+    $createOfficeUserBtn.click(function() {
+        $createOfficeUserBtn.modal("show");
     });
 
     $("#formModalSelect").change(function() {
@@ -195,14 +202,10 @@ function checkForUsage() {
             $("#transaction-term").slideDown().addClass("is-visible");
             $("#card-number").hide();
             $("#date").hide();
-            // HACK: until i find proper fix
-            window.location.reload();
         } else if (this.value == "CARD") {
             $("#card-number").slideDown().addClass("is-visible");
             $("#transaction-term").hide();
             $("#date").hide();
-            // HACK: until i find proper fix
-            window.location.reload();
         } else if (this.value == "DAY") {
             $("#date").slideDown().addClass("is-visible");
             $("#dateInput").datepicker({
@@ -213,8 +216,6 @@ function checkForUsage() {
             });
             $("#card-number").hide();
             $("#transaction-term").hide();
-            // HACK: until i find proper fix
-            window.location.reload();
         } else {
             $("#transaction-term").slideDown().addClass("is-visible");
         }
@@ -246,6 +247,30 @@ function checkForUsage() {
         // if any error occured
         request.fail(setupSearchTableError);
     });
+
+    $officeModalForm.submit(function(event) {
+        // let my js handle event handling
+        event.preventDefault();
+
+        $data = $officeModalForm.serialize();
+
+        // check if we have nay previous requests
+        if (request) {
+            request.abort();
+        }
+
+        request = $.ajax({
+            url: "../php/createNewOfficeUser.php",
+            type: "post",
+            data: $data
+        });
+
+        // if successfully done
+        request.done(successfullNewUser);
+
+        // if any error occured
+        request.fail(errorNewUser);
+    });
 }
 
 function setupSearchTable(response, status, jqXHR) {
@@ -260,6 +285,7 @@ function setupSearchTable(response, status, jqXHR) {
     // var $inputs = $formModalForm.find("input, select, button, textarea");
     // $inputs.prop("disabled", false);
     $formModal.modal("hide");
+    $infoModalBody.html("");
 
     if (typeof response != 'object') {
         console.log(response);
@@ -282,26 +308,26 @@ function setupSearchTable(response, status, jqXHR) {
         $modalData += ""+
             "<div class='col-md-12' style='padding: 20px; border-bottom: 1px dotted black;'>" + 
                 "<h3>Transaction #" + i + "</h3>" +
-                "<p>Transaction ID: "+ response.transactions[i].uid+"</p>" +
-                "<p>Source: "+ response.transactions[i].source+"</p>" +
-                "<p>User: "+ response.transactions[i].user+"</p>" +
-                "<p>Card Type: "+ response.transactions[i].card_type+"</p>" +
-                "<p>Card Number: "+ response.transactions[i].card_number+"</p>" +
-                "<p>Card CVV: "+ response.transactions[i].card_cvv_number+"</p>" +
-                "<p>Card Expiry Date: "+ response.transactions[i].card_expiry_date+"</p>" +
-                "<p>Amount Charged: "+ response.transactions[i].amount+"</p>" +
-                "<p>Name on Card: "+ response.transactions[i].card_cust_name+"</p>" +
-                "<p>Billing Name: "+ response.transactions[i].billing_name+"</p>" +
-                "<p>Billing Email: "+ response.transactions[i].billing_email+"</p>" +
-                "<p>Billing Phone: "+ response.transactions[i].billing_phone+"</p>" +
-                "<p>Date Of Birth: "+ response.transactions[i].billing_dob+"</p>" +
-                "<p>Billing Company: "+ response.transactions[i].billing_company+"</p>" +
-                "<p>Billing Address: "+ response.transactions[i].billing_address+"</p>" +
-                "<p>Billing City: "+ response.transactions[i].billing_city+"</p>" +
-                "<p>Billing State: "+ response.transactions[i].billing_state+"</p>" +
-                "<p>Billing Country: "+ response.transactions[i].billing_country+"</p>" +
-                "<p>Billing Postal Code: "+ response.transactions[i].billing_postal_code+"</p>" +
-                "<p>Charged At: "+ response.transactions[i].created_at+"</p>" +
+                "<p><strong>Transaction ID: </strong>"+ response.transactions[i].uid+"</p>" +
+                "<p><strong>Source: </strong>"+ response.transactions[i].source+"</p>" +
+                "<p><strong>User: </strong>"+ response.transactions[i].user+"</p>" +
+                "<p><strong>Card Type: </strong>"+ response.transactions[i].card_type+"</p>" +
+                "<p><strong>Card Number: </strong>"+ response.transactions[i].card_number+"</p>" +
+                "<p><strong>Card CVV: </strong>"+ response.transactions[i].card_cvv_number+"</p>" +
+                "<p><strong>Card Expiry Date: </strong>"+ response.transactions[i].card_expiry_date+"</p>" +
+                "<p><strong>Amount Charged: </strong>"+ response.transactions[i].amount+"</p>" +
+                "<p><strong>Name on Card: </strong>"+ response.transactions[i].card_cust_name+"</p>" +
+                "<p><strong>Billing Name: </strong>"+ response.transactions[i].billing_name+"</p>" +
+                "<p><strong>Billing Email: </strong>"+ response.transactions[i].billing_email+"</p>" +
+                "<p><strong>Billing Phone: </strong>"+ response.transactions[i].billing_phone+"</p>" +
+                "<p><strong>Date Of Birth: </strong>"+ response.transactions[i].billing_dob+"</p>" +
+                "<p><strong>Billing Company: </strong>"+ response.transactions[i].billing_company+"</p>" +
+                "<p><strong>Billing Address: </strong>"+ response.transactions[i].billing_address+"</p>" +
+                "<p><strong>Billing City: </strong>"+ response.transactions[i].billing_city+"</p>" +
+                "<p><strong>Billing State: </strong>"+ response.transactions[i].billing_state+"</p>" +
+                "<p><strong>Billing Country: </strong>"+ response.transactions[i].billing_country+"</p>" +
+                "<p><strong>Billing Postal Code: </strong>"+ response.transactions[i].billing_postal_code+"</p>" +
+                "<p><strong>Charged At: </strong>"+ response.transactions[i].created_at+"</p>" +
             "</div>";
     }
 
@@ -310,6 +336,10 @@ function setupSearchTable(response, status, jqXHR) {
     // show data
     $infoModal.modal('show');
     console.log(response);
+
+    $infoModal.on("hide.bs.modal", function() {
+        window.location.reload();
+    });
 }
 
 function setupSearchTableError(jqXHR, status, error) {
@@ -317,4 +347,41 @@ function setupSearchTableError(jqXHR, status, error) {
     $infoModal.modal('show');
 }
 
-// search button handler
+// new user
+
+function successfullNewUser(response, status, jqXHR) {
+    var $infoModalBody = $("#info-body-row");
+    var $infoModal = $("#infoModal");
+    var $infoModalTitle = $("#infoModalTitle");
+    var $officeModal = $("#officeUserModal");
+
+    $officeModal.modal("hide");
+    $infoModalBody.html("");
+
+    if (typeof response != 'object') {
+        console.log(response);
+        $infoModalBody.html("<div class='col-md-12'><div class='alert alert-danger'>"+ "Response is not a object" +"</div>");
+        $infoModal.modal('show');
+        return;
+    }
+
+    if (response.error) {
+        $infoModalBody.html("<div class='col-md-12'><div class='alert alert-danger'>"+ response.message +"</div>");
+        $infoModal.modal('show');
+        return;
+    }
+
+    $infoModalBody.html("<div class='col-md-12'><div class='alert alert-success'>"+ response.message +"</div>");
+    // show data
+    $infoModal.modal('show');
+    console.log(response);
+
+    $infoModal.on("hide.bs.modal", function() {
+        window.location.reload();
+    });
+}
+
+function errorNewUser(jqXHR, status, error) {
+     $infoModalBody.html("<div class='col-md-12'><div class='alert alert-danger'>"+ error +"</div>");
+     $infoModal.modal('show');
+}

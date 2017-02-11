@@ -9,3 +9,6 @@ output
 
 # ignore vscode files
 .vscode
+
+# ignore any kind of log files
+*.log
