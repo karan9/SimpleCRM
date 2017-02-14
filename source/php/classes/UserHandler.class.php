@@ -78,6 +78,21 @@ class UserHandler {
         }
     }
 
+    public function findUserById($uid) {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE uid = ?");
+        $stmt->bind_param("s", $uid);
+        $stmt->execute();
+        $stmt->store_result(); // store it some where
+        $user = $this->fetchAssocStatement($stmt);
+        $stmt->close();
+ 
+        if ($user) {
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
     public function findUserByRole($role) {
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE role = ?");
         $stmt->bind_param("s", $role);
