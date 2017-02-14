@@ -133,6 +133,7 @@ function setupTable(response, status, jqXHR) {
             "<td>"+ response.transactions[i].created_at +"</td>"+ 
             "<td data-uid="+response.transactions[i].uid+">"+ response.transactions[i].uid +"</td>"+
             "<td>"+ response.transactions[i].card_cust_name +"</td>"+
+            "<td>"+ response.transactions[i].currency +"</td>"+
             "<td>"+ response.transactions[i].amount +"</td>"+
             "<td>"+ response.transactions[i].user +"</td>"+
             "<td>"+ response.transactions[i].source +"</td>"+
@@ -188,15 +189,24 @@ function checkForUsage() {
     var $createOfficeUserBtn = $("#create-user-office-btn");
     var $formModalForm = $("#formModal-form");
     var $officeModalForm = $("#officeUserModal-form");
+    var $logoutBtn = $("#logout-btn");
 
     $searchBtn.click(function() {
         $formModal.modal('show');
     });
 
     $createOfficeUserBtn.click(function() {
-        $createOfficeUserBtn.modal("show");
+        $officeModal.modal("show");
     });
 
+    // LOG THE FUCK OUT!
+    $logoutBtn.click(function() {
+        window.sessionStorage.removeItem("username");
+        window.sessionStorage.removeItem("role");
+        window.sessionStorage.removeItem("uid");
+        window.location.href = "../verify-user";
+    });
+    
     $("#formModalSelect").change(function() {
         if (this.value == "UID") {
             $("#transaction-term").slideDown().addClass("is-visible");
@@ -260,7 +270,7 @@ function checkForUsage() {
         }
 
         request = $.ajax({
-            url: "../php/createNewOfficeUser.php",
+            url: "../php/testUser.php",
             type: "post",
             data: $data
         });
@@ -315,6 +325,7 @@ function setupSearchTable(response, status, jqXHR) {
                 "<p><strong>Card Number: </strong>"+ response.transactions[i].card_number+"</p>" +
                 "<p><strong>Card CVV: </strong>"+ response.transactions[i].card_cvv_number+"</p>" +
                 "<p><strong>Card Expiry Date: </strong>"+ response.transactions[i].card_expiry_date+"</p>" +
+                "<p><strong>Currency: </strong>"+ response.transactions[i].currency+"</p>" +
                 "<p><strong>Amount Charged: </strong>"+ response.transactions[i].amount+"</p>" +
                 "<p><strong>Name on Card: </strong>"+ response.transactions[i].card_cust_name+"</p>" +
                 "<p><strong>Billing Name: </strong>"+ response.transactions[i].billing_name+"</p>" +

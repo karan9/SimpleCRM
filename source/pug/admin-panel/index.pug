@@ -54,28 +54,21 @@ body.pad-top-50
                             .form-group#officeModalUsername
                                 label(for="searchCrietria").col-sm-3.control-label Enter Desired Username
                                 .col-sm-6
-                                    input.form-control(type="text", name="username", placeholder="Enter Transaction Id")
+                                    input.form-control(type="text", name="username", placeholder="Enter Username")
 
                             .form-group#officeModalPassword
                                 label(for="searchCrietria").col-sm-3.control-label Enter Desired Password
                                 .col-sm-6
-                                    input.form-control(type="text", name="password", placeholder="Enter Card Number" 7)
+                                    input.form-control(type="text", name="password", placeholder="Enter Password")
                             
                             .form-group#officeModalRole
                                 label(for="searchCrietria").col-sm-3.control-label Enter Role
                                 .col-sm-6
-                                    select.form-control(name="searchSelect")#officeModalSelect
-                                        option(value="client") Client
-                                        option(value="admin") Admin
-
-                            .form-group#OfficeModalAlert
-                                .col-sm-10.col-md-offset-1
-                                    .alert.alert-danger#officeModalAlertdiv Oh! Snap Something went wrong
+                                    input.form-control(type="text", name="role", placeholder="" value="client")
 
                     .modal-footer
                         button(type="button", data-dismiss="modal").btn.btn-default Close
                         button(type="submit").btn.btn-primary Submit
-
 
     // ---------------------  form modal ------------------------------- //
     form(action="#")#formModal-form.form-horizontal
@@ -161,7 +154,7 @@ body.pad-top-50
                             button.btn.btn-primary.btn-block#create-user-office-btn Create New Office User
                     li
                         a(href="#")
-                            button.btn.btn-primary.btn-block#create-user-api-btn Create New Api User
+                            button.btn.btn-primary.btn-block#logout-btn Logout
 
             // center panel starts
             .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
@@ -173,7 +166,8 @@ body.pad-top-50
                                 th Date
                                 th Transaction ID
                                 th Customer Name
-                                th Amount ($ USD)
+                                th Currency
+                                th Amount
                                 th Merchant ID
                                 th Source
                         tbody#transaction-body

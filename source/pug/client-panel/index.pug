@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    title Welcome to Simple CRM
+    // Bootstrap
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+    // Font Awsome
+    link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
+    // jQuery UI CSS
+    link(rel="stylesheet", href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
+    // Custom
+    link(rel="stylesheet", href="../css/styles.css")
+body.pad-top-50
+
+    // ----------------------- Modals and Forms ----------------------------------------- //
+    // initial modal
+    .modal.fade#pageLoaderModal(tabindex="-1", role="dialog", aria-labelledby="pageLoaderModal")
+        .modal-dialog.modal-lg(role="document")
+            .modal-content
+                .modal-body
+                    .row
+                        .col-md-12
+                           z h3.modal-title Please Wait Preparing Information
+                        .col-md-12#alert-error-div
+                            .alert.alert-danger Oh! Snap Something not working
+                .modal-footer
+                    .progress
+                        .progress-bar.progress-bar-striped.active(role="progressbar", aria-valuenow="45", aria-valuemin="0", aria-valuemax="100")
+                            span.sr-only Progress Bar
+
+    // ----------------------    information Modal For all Kind of things ------------------------- //
+    .modal.fade#infoModal(tabindex="-1", role="dialog", aria-labelledby="infoModal")
+        .modal-dialog.modal-lg(role="document")
+            .modal-content
+                .modal-header
+                    h4.modal-title#infoModalTitle
+                .modal-body
+                    .row#info-body-row
+
+                .modal-footer
+                    button(type="button", data-dismiss="modal").btn.btn-default Close
+
+    // ------------------------    Main Page Meat -------------------------------------------- //
+
+    // main navbar
+    nav.navbar.navbar-inverse.navbar-fixed-top
+        .container-fluid
+            button(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar").navbar-toggle.collapsed
+                span.sr-only Toggle Navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(href="#") TheeZorba Managment Panel
+
+            #navbar.navbar-collapse.collapse
+                ul.nav.navbar-nav.navbar-right
+                    li
+                        a#username(href="#") Dashboard
+
+                    li
+                        a#uid(href="#") User
+
+                    li
+                        a#role(href="#") Settings
+    // PANEL STARTS HERE
+    #error-box.container-fluid
+        #error-message-box.alert.alert-danger(role='alert') Oh! Snap Something Went Wrong 
+    .container-fluid
+        form#purchase-form.form-horizontal(method='post')
+            .panel.panel-primary
+                .panel-heading Purchase Form
+                .panel-body
+                    .container-fluid
+                        .form-group
+                            label.col-sm-3.control-label(for='card-type') Card Type
+                            .col-sm-6
+                                select#card-type.form-control(name='card-type')
+                                    option(value='MasterCard') MasterCard
+                                    option(value='Carte Blanche') Carte Blanche
+                                    option(value='American Express') American Express
+                                    option(value='Diners Club') Diners Club
+                                    option(value='Discover') Discover
+                                    option(value='Enroute') Enroute
+                                    option(value='JCB') JCB
+                                    option(value='Maestro') Maestro
+                                    option(value='Solo') Solo
+                                    option(value='Switch') Switch
+                                    option(value='Visa') Visa
+                                    option(value='Visa Electron') Visa Electron
+                                    option(value='LaserCard') LaserCard
+                        .form-group
+                            label.col-sm-3.control-label(for='card-num') Card Number
+                            .col-sm-6
+                                input#card-num.form-control(type='text', name='card-num', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='card-cvv') CVV Number
+                            .col-sm-6
+                                input#card-cvv.form-control(type='text', name='card-cvv', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='card-exp-dat') Expiry Date
+                            .col-sm-6
+                                input#card-exp-dat.form-control(type='text', name='card-exp-dat', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='card-currency') Expiry Date
+                            .col-sm-6
+                                select#currency.form-control(name='card-currency')
+                                    option(value='USD') USD
+                                    option(value='GBP') POUND
+                                    option(value='EURO') EURO
+                                    option(value='AUD') AUS DOLLAR
+                        .form-group
+                            label.col-sm-3.control-label(for='amount') Amount
+                            .col-sm-6
+                                select#amount.form-control(name='amount')
+                                    option(value='29.99') 29.99
+                                    option(value='49.99') 49.99
+                                    option(value='79.99') 79.99
+                                    option(value='99.99') 99.99
+                                    option(value='129.99') 129.99
+                                    option(value='149.99') 149.99
+                                    option(value='179.99') 179.99
+                                    option(value='199.99') 199.99
+                                    option(value='229.99') 229.99
+                                    option(value='249.99') 249.99
+                                    option(value='279.99') 279.99
+                                    option(value='299.99') 299.99
+                                    option(value='329.99') 329.99
+                                    option(value='349.99') 349.99
+                                    option(value='379.99') 379.99
+                                    option(value='399.99') 399.99
+                                    option(value='429.99') 429.99
+                                    option(value='449.99') 449.99
+                                    option(value='479.99') 479.99
+                                    option(value='499.99') 499.99
+                        .form-group
+                            label.col-sm-3.control-label(for='card-name') Name On Card
+                            .col-sm-6
+                                input#card-name.form-control(type='text', name='card-name', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='card-uid') Enter Your User Id
+                            .col-sm-6
+                                input#card-uid.form-control(type='text', name='userId', required='')
+            .panel.panel-primary
+                .panel-heading Billing information
+                .panel-body
+                    .container-fluid
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-name') Name
+                            .col-sm-6
+                                input#billing-name.form-control(type='text', name='billing-name', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-email') Email
+                            .col-sm-6
+                                input#billing-email.form-control(type='email', name='billing-email', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-phone') Phone
+                            .col-sm-6
+                                input#billing-phone.form-control(type='text', name='billing-phone', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-dob') Date of Birth
+                            .col-sm-6
+                                input#billing-dob.form-control(type='text', name='billing-dob', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-company') Company
+                            .col-sm-6
+                                select#billing-company(name="billing-company").form-control
+                                    option(value="bestbrandsshop") Best brands Shop
+                                    option(value="wishyourdeals") WishYour Deals
+                                    option(value="futureweb") FutureWeb Ltd
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-address') Address
+                            .col-sm-6
+                                input#billing-address.form-control(type='text', name='billing-address', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-city') City
+                            .col-sm-6
+                                input#billing-city.form-control(type='text', name='billing-city', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-state') State
+                            .col-sm-6
+                                input#billing-state.form-control(type='text', name='billing-state', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-country') Country
+                            .col-sm-6
+                                input#billing-country.form-control(type='text', name='billing-country', required='')
+                        .form-group
+                            label.col-sm-3.control-label(for='billing-postal-code') Postal Code
+                            .col-sm-6
+                                input#billing-postal-code.form-control(type='text', name='billing-postal-code', required='')
+            .panel.panel-primary
+                .panel-heading Shipping Confirmation Box
+                .panel-body
+                    .container-fluid
+                        .form-group
+                            label.col-sm-6.control-label(for='verifyId') Shipping Information same as above
+                            .col-sm-3
+                                input#checkbox.form-control(type='checkbox', name='checkbox')
+            .panel.panel-primary
+                .panel-heading Shipping information
+                .panel-body
+                    .container-fluid
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-name') Name
+                            .col-sm-6
+                                input#shipping-name.form-control(type='text', name='shipping-name')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-email') Email
+                            .col-sm-6
+                                input#shipping-email.form-control(type='text', name='shipping-email')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-phone') Phone
+                            .col-sm-6
+                                input#shipping-phone.form-control(type='text', name='shipping-phone')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-company') Company
+                            .col-sm-6
+                                input#shipping-company.form-control(type='text', name='shipping-company')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-address') Address
+                            .col-sm-6
+                                input#shipping-address.form-control(type='text', name='shipping-address')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-city') City
+                            .col-sm-6
+                                input#shipping-city.form-control(type='text', name='shipping-city')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-state') State
+                            .col-sm-6
+                                input#shipping-state.form-control(type='text', name='shipping-state')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-country') Country
+                            .col-sm-6
+                                input#shipping-country.form-control(type='text', name='shipping-country')
+                        .form-group
+                            label.col-sm-3.control-label(for='shipping-postal-code') Postal Code
+                            .col-sm-6
+                                input#shipping-postal-code.form-control(type='text', name='shipping-postal-code')
+            .panel.panel-primary
+                .panel-heading Pay Now
+                .panel-body
+                    .container-fluid
+                        .form-group
+                            .col-sm-offset-8.col-sm-3
+                                button.btn.btn-lg.btn-primary(type='Submit') Pay Now
+    footer.navbar.navbar-inverse
+        marquee
+            | We Accept all major Credit cards, Visa , Master Card , American Express Also.    We accept all major currency USD.
+    #myModal.modal.fade(role='dialog', aria-labelledby='MyModalLabel', tabindex='-1')
+        .modal-dialog.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h4#MyModalLabel.modal-title Purchase Successfull
+                .modal-body
+                    .container-fluid
+                        .col-sm-8
+                            h3 Thank you!
+                            h3 Your Purchase is Being verified!
+                .modal-footer
+                    button.btn.btn-primary.goHome Go to Products
+    #myModalError.modal.fade(role='dialog', aria-labelledby='MyModalLabel', tabindex='-1')
+        .modal-dialog.modal-lg(role='document')
+            .modal-content
+                .modal-header
+                    h4#MyModalLabel.modal-title Purchase Error!
+                .modal-body
+                    .container-fluid
+                        .col-sm-8
+                            h3 Oh No!
+                            h3 An Error Occured Go back to product page and retry!
+                .modal-footer
+                    button.btn.btn-primary.goHome Go to Products
+
+    // jQuery
+    script(src="https://code.jquery.com/jquery-3.1.1.min.js", integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=", crossorigin="anonymous")
+    // jQuery UI
+    script(src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js", integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=", crossorigin="anonymous")
+    // monthpicker
+    script(src="../js/jquery.mtz.monthpicker-min.js", type="text/javascript")
+    // Bootstrap js
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    // custom.js
+    script(src="../js/script-client.js")

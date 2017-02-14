@@ -28,21 +28,11 @@ function checkSignupVars($username, $passwd, $role) {
 }
 
 function checkSignup(UserHandler $userHandler, $username, $passwd, $role) {
-    
-    // grab the user
-    $user = $userHandler->findUserByUsername($username);
-    // check starts
-    if ($user) {
-        return false;
-    } else {
-       $ret = $userHandler->createUser($username, $passwd, $role, true);
-    }
-
-    // checksFlag
+    $ret = $userHandler->createUser($username, $passwd, $role);
     if ($ret) {
-        return $user;
+        return $ret;
     } else {
-        return FALSE;
+        false;
     }
 }
 
@@ -50,7 +40,7 @@ function getJsonEncodedValue($val, $msg) {
     // variable to hold our response
     $response = array("error" => false);
     
-    if ($val != null) { 
+    if ($val) { 
         $response["error"] = false;
         $response["message"] = "success: " . $msg;
         $response["user"] = $val;
@@ -66,22 +56,23 @@ function main() {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = $_POST['role'];
+    $role = strtolower($role);
     $userHandler = new UserHandler();
     // checkLoginVars
-    $ret = checkSignupVars($username, $password, $role);
-    if ($ret) {
+    //$ret = checkSignupVars($username, $password, $role);
+    //if ($ret) {
         $val = checkSignup($userHandler, $username, $password, $role);
         if ($val) {
             header("Content-Type: application/json");
             echo getJsonEncodedValue($val, "User Successfully Created");
         } else {
             header("Content-Type: application/json");
-            echo getJsonEncodedValue(null, "Incorrect Signup details");
+            echo getJsonEncodedValue(false, "Incorrect Signup details");
         }
-    } else {
-        header("Content-Type: application/json");
-        echo getJsonEncodedValue(null, "Please Check Your SignUp Details");  
-    }
+    //} else {
+    //    header("Content-Type: application/json");
+    //    echo getJsonEncodedValue(null, "Please Check Your SignUp Details");  
+    //}
 }
 
 // initiate things!!

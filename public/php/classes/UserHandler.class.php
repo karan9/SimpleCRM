@@ -16,22 +16,11 @@ class UserHandler {
         $this->conn = $db->connect();
     }
 
-    private function getUniqueId($isAdmin, $isZorbaOffice) {
-        $adminPrefix = 'AD';
+    private function getUniqueId() {
         $clientPrefix = 'ZO';
-        $apiPrefix = 'API';
-
         $randHash = mt_rand(5000, 10000);
-        
-        if ($isAdmin && $isZorbaOffice) {
-            return $adminPrefix . $randHash;
-        } else if (!$isAdmin && $isZorbaOffice) {
-            return $clientPrefix . $randHash;
-        } elseif (!$isAdmin && !$isZorbaOffice) {
-            return $apiPrefix . $randHash;
-        } else {
-            return $randHash;
-        }
+
+        return $clientPrefix . $randHash;
     }
 
     private function fetchAssocStatement($stmt) {
@@ -50,25 +39,20 @@ class UserHandler {
         return null;
     }
 
-    public function createUser($username, $password, $role, $isZorbaOffice) {
+    public function createUser($username, $password, $role) {
         // generate unique id
-        if ($role == 'admin') {
-            $uid = $this->getUniqueId(true, $isZorbaOffice);
-        } else {
-            $uid = $this->getUniqueId(false, $isZorbaOffice);
-        }
+        $uid = $this->getUniqueId();
         
         // send user
         $stmt = $this->conn->prepare("INSERT INTO users(uid, username, password, role, created_at) VALUES(?, ?, ?, ?, NOW())");
         $stmt->bind_param("ssss", $uid, $username, $password, $role);
         $result = $stmt->execute();
         $stmt->close();
-
         if ($result) {
-            return true;
+            return $result;
         } else {
             return false;
-        }
+        }        
     }
 
     public function updateUser($username) {
