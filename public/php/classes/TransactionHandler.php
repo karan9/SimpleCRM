@@ -91,7 +91,7 @@ class TransactionHandler {
     }
 
     public function findTransactions() {
-        $stmt = $this->conn->prepare("SELECT * FROM transaction ORDER BY id DESC LIMIT  7");
+        $stmt = $this->conn->prepare("SELECT * FROM transaction ORDER BY id DESC LIMIT  15");
         $stmt->execute();
         $stmt->store_result(); // store it some where
         $transaction = array();

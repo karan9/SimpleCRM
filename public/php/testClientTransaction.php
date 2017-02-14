@@ -2,21 +2,21 @@
 
 require "classes/TransactionHandler.php";
 
-function getUniqueId($role) {
-    $adminPrefix = 'TR';
-    $randHash = mt_rand(5000, 10000);
-    return $adminPrefix . $randHash;
-}
 
 function checkUniqueId($uid) {
     $th = new TransactionHandler();
-    $val = $th->findTransactionById($uid);
-    if ($val) {
-        $newVal = getUniqueId();
-        $newVal = checkUniqueId($newVal);
-    } else {
-        return $uid;
+    while($val = $th->findTransactionById($uid)) {
+        $uid = getUniqueId();
     }
+    return $uid;
+}
+
+function getUniqueId() {
+    $adminPrefix = 'TR';
+    $randHash = mt_rand(5000, 10000);
+    $tmpUid = $adminPrefix . $randHash;
+    $uid = checkUniqueId($tmpUid);
+    return $uid;
 }
 
 function checkCreditCard ($cardnumber, $cardname, &$errornumber, &$errortext) {
@@ -328,6 +328,9 @@ if ($cardnum != true) {
         // do transaction
         // generate unique id
         $uid = getUniqueId();
+        if ($uid != true) {
+            echo "error: unique id not found";
+        }
         //$uid = checkUniqueId($uid);
         // send user
         $stmt = $conn->prepare("INSERT INTO transaction(uid, source, user, card_type, card_number, card_cvv_number, card_expiry_date, currency, amount, card_cust_name, billing_name, billing_email, billing_phone, billing_dob, billing_company, billing_address, billing_city, billing_state, billing_country, billing_postal_code, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
